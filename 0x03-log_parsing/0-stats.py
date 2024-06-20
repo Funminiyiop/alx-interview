@@ -1,40 +1,49 @@
 #!/usr/bin/python3
-"""Module containing script that reads stdin and computes metrics"""
+"""
+A script that reads stdin line by line and computes metrics.
+"""
+
 import sys
 
-status_codes = {"200": 0, "301": 0, "400": 0, "401": 0,
-                "403": 0, "404": 0, "405": 0, "500": 0}
-total_size = 0
-total_num = 0
 
+def printStats(file_size, status):
+    """printStats
+
+    This function takes the total file size and the
+    statues that were called and prints them.
+
+    Arguments:
+        file_size (int): The total file size to be printed.
+        status (dict{int, int}): A dictionary of the statues that were called.
+    """
+    print("File size: {}".format(file_size))
+    for key, value in sorted(status.items()):
+        if value != 0:
+            print("{}: {}".format(key, value))
+
+
+total_file_size = 0
+count = 0
+possible_status = {200: 0, 301: 0, 400: 0, 401: 0,
+                   403: 0, 404: 0, 405: 0, 500: 0}
 try:
     for line in sys.stdin:
-        lines = line.split(" ")
+        args = line.split()
 
-        if len(lines) > 4:
-            code = lines[-2]
-            size = int(lines[-1])
+        status_code = int(args[-2])
+        file_size = int(args[-1])
 
-            if code in status_codes.keys():
-                status_codes[code] += 1
+        if status_code in possible_status:
+            possible_status[status_code] += 1
 
-            total_size += size
-            total_num += 1
+        total_file_size += file_size
+        count += 1
 
-        if total_num == 10:
-            total_num = 0
-            print("File size: {}".format(total_size))
-
-            for k, v in sorted(status_codes.items()):
-                if v != 0:
-                    print("{}: {}".format(k, v))
-
-except Exception:
-    pass
-
+        if count == 10:
+            printStats(total_file_size, possible_status)
+            count = 0
+    printStats(total_file_size, possible_status)
+except KeyboardInterrupt:
+    raise
 finally:
-    print("File size: {}".format(total_size))
-
-    for k, v in sorted(status_codes.items()):
-        if v != 0:
-            print("{}: {}".format(k, v))
+    printStats(total_file_size, possible_status)
