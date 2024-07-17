@@ -1,12 +1,13 @@
 #!/usr/bin/python3
-"""2D matrix rotation module.
+"""
+Matrix rotation by 90 degrees
 """
 
 
 def rotate_2d_matrix(matrix):
-    """Rotates an m by n 2D matrix in place.
     """
-
+    matrix rotating
+    """
     n = len(matrix)
     for i in range(int(n / 2)):
         y = (n - i - 1)
