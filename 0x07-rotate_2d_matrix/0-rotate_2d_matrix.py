@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Matrix rotation by 90 degrees
+Rotate matrix by 90 degrees
 """
 
 
