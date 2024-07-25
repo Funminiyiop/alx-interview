@@ -10,12 +10,12 @@ def makeChange(coins, total):
     Returns the fewest number of coins needed.
     If total is 0 or less, return 0.
     If total not met by any number of coins, return -1.
-    
+
     Hint:
     coins is a list
     coin value = an integer greater than 0
     """
-    
+
     if total <= 0:
         return 0
 
@@ -34,4 +34,3 @@ def makeChange(coins, total):
 
     check = dup_total > 0 and ncoins > 0
     return -1 if check or ncoins == 0 else ncoins
-    
