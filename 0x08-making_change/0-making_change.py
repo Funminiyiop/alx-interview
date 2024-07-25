@@ -31,8 +31,7 @@ def makeChange(coins, total):
         for coin in coins:
             while coin <= total:
                 total -= coin
-                change = change + 1
+                change += 1
             if (total == 0):
                 return change
         return -1
-        
