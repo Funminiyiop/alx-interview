@@ -1,43 +1,37 @@
 #!/usr/bin/python3
 """
-Coin Change Algorithm
+This calculates the fewest number of coins
+needed to meet a given amount total.
 """
 
 
 def makeChange(coins, total):
-    """Calculate the fewest number needed to meet,
-    needed to meet a given total amount.
-    Args:
-        coins ([list]): A list of coin values available.
-        total ([number]): The target amount
-    Return: The fewest number of coins needed to reach the total,
-    or -1 if not possible.
+    """
+    Returns the fewest number of coins needed.
+    If total is 0 or less, return 0.
+    If total not met by any number of coins, return -1.
+    
+    Hint:
+    coins is a list
+    coin value = an integer greater than 0
     """
     
-    """ if total <= 0:
+    if total <= 0:
         return 0
-    # sort the coins in descending order
+
     coins.sort(reverse=True)
-    change = 0
-    for coin in coins:
-        if total <= 0:
-            break
-        temp = total // coin
-        change += temp
-        total -= (temp * coin)
-    if total != 0:
-        return -1
-    return change
-    """
 
-    if total < 1:
-        return 0
+    i, ncoins = (0, 0)
+    cpy_total = total
+    len_coins = len(coins)
 
-    dp = [float('inf')] * (total + 1)
-    dp[0] = 0
+    while(i < len_coins and cpy_total > 0):
+        if (cpy_total - coins[i]) >= 0:
+            cpy_total -= coins[i]
+            ncoins += 1
+        else:
+            i += 1
 
-    for coin in coins:
-        for i in range(coin, total + 1):
-            dp[i] = min(dp[i], dp[i - coin] + 1)
-
-    return dp[total] if dp[total] != float('inf') else -1
+    check = cpy_total > 0 and ncoins > 0
+    return -1 if check or ncoins == 0 else ncoins
+    
