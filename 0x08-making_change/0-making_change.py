@@ -15,22 +15,20 @@ def makeChange(coins, total):
     coins is a list
     coin value = an integer greater than 0
     """
+        
+    if total < 0:
+        return -1
     
-    if total <= 0:
-        return 0
-
+    # Sort coins in descending order
     coins.sort(reverse=True)
-
-    i, ncoins = (0, 0)
-    cpy_total = total
-    len_coins = len(coins)
-
-    while(i < len_coins and cpy_total > 0):
-        if (cpy_total - coins[i]) >= 0:
-            cpy_total -= coins[i]
-            ncoins += 1
-        else:
-            i += 1
-
-    check = cpy_total > 0 and ncoins > 0
-    return -1 if check or ncoins == 0 else ncoins
+    
+    num_coins = 0
+    remaining_total = total
+    
+    for coin in coins:
+        if remaining_total <= 0:
+            break
+        num_coins += remaining_total // coin
+        remaining_total %= coin
+    
+    return num_coins if remaining_total == 0 else -1
