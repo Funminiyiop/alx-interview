@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Module defining isWinner function."""
 
-
 def isWinner(x, nums):
     """Function to get who has won in prime game"""
     mariaWinsCount = 0
@@ -33,10 +32,10 @@ def isWinner(x, nums):
             isMariaTurns = not isMariaTurns
 
     if mariaWinsCount > benWinsCount:
-        return "Winner: Maria"
+        return "Maria"
 
     if mariaWinsCount < benWinsCount:
-        return "Winner: Ben"
+        return "Ben"
 
     return None
 
